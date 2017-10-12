@@ -2153,25 +2153,18 @@ void process_commands()
                           {
                           #if BEEPER > 0
                           
-                            if (counterBeep== 500){
-                              counterBeep = 0;
+                            if (counterBeep <= 2){
+                              SET_OUTPUT(BEEPER);
+                              if (counterBeep== 0){
+                                WRITE(BEEPER,HIGH);
+                              }
                               
+                              if (counterBeep== 2){
+                                WRITE(BEEPER,LOW);
+                              }
+
+                              counterBeep++;
                             }
-                          
-                            
-                            SET_OUTPUT(BEEPER);
-                            if (counterBeep== 0){
-                              WRITE(BEEPER,HIGH);
-                            }
-                            
-                            if (counterBeep== 20){
-                              WRITE(BEEPER,LOW);
-                            }
-                            
-                            
-                            
-                          
-                            counterBeep++;
                           #else
                       #if !defined(LCD_FEEDBACK_FREQUENCY_HZ) || !defined(LCD_FEEDBACK_FREQUENCY_DURATION_MS)
                               lcd_buzz(1000/6,100);
