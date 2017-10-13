@@ -1,4 +1,4 @@
-/* -*- c++ -*- */
+  /* -*- c++ -*- */
 
 /*
     Reprap firmware based on Sprinter and grbl.
@@ -2144,45 +2144,18 @@ void process_commands()
                         uint8_t cnt=0;
                         int counterBeep = 0;
                         lcd_wait_interact();
+
+                        SET_OUTPUT(BEEPER);
+                        WRITE(BEEPER, HIGH);
+                        delay(100);
+                        WRITE(BEEPER, LOW);
+                        
                         while(!lcd_clicked()){
                           cnt++;
                           manage_heater();
                           manage_inactivity(true);
                           //lcd_update();
-                          if(cnt==0)
-                          {
-                          #if BEEPER > 0
-                          
-                            if (counterBeep== 500){
-                              counterBeep = 0;
-                              
-                            }
-                          
-                            
-                            SET_OUTPUT(BEEPER);
-                            if (counterBeep== 0){
-                              WRITE(BEEPER,HIGH);
-                            }
-                            
-                            if (counterBeep== 20){
-                              WRITE(BEEPER,LOW);
-                            }
-                            
-                            
-                            
-                          
-                            counterBeep++;
-                          #else
-                      #if !defined(LCD_FEEDBACK_FREQUENCY_HZ) || !defined(LCD_FEEDBACK_FREQUENCY_DURATION_MS)
-                              lcd_buzz(1000/6,100);
-                      #else
-                        lcd_buzz(LCD_FEEDBACK_FREQUENCY_DURATION_MS,LCD_FEEDBACK_FREQUENCY_HZ);
-                      #endif
-                          #endif
-                          }
                         }
-                        
-                        WRITE(BEEPER,LOW);
                         
                         target[E_AXIS]+= FILAMENTCHANGE_FIRSTFEED ;
                         plan_buffer_line(target[X_AXIS], target[Y_AXIS], target[Z_AXIS], target[E_AXIS], 20, active_extruder); 
@@ -5164,9 +5137,14 @@ case 404:  //M404 Enter the nominal filament width (3mm, 1.75mm ) N<3.0> or disp
         int counterBeep = 0;
         lcd_wait_interact();
 		load_filament_time = millis();
+        SET_OUTPUT(BEEPER);
+        WRITE(BEEPER, HIGH);
+        delay(100);
+        WRITE(BEEPER, LOW);
+        
         while(!lcd_clicked()){
 
-		  cnt++;
+		      cnt++;
           manage_heater();
           manage_inactivity(true);
 
@@ -5176,31 +5154,8 @@ case 404:  //M404 Enter the nominal filament width (3mm, 1.75mm ) N<3.0> or disp
 
 #endif // SNMM*/
 
-          if(cnt==0)
-          {
-          #if BEEPER > 0
-            if (counterBeep== 500){
-              counterBeep = 0;  
-            }
-            SET_OUTPUT(BEEPER);
-            if (counterBeep== 0){
-              WRITE(BEEPER,HIGH);
-            }			
-            if (counterBeep== 20){
-              WRITE(BEEPER,LOW);
-            }
-            counterBeep++;
-          #else
-			   #if !defined(LCD_FEEDBACK_FREQUENCY_HZ) || !defined(LCD_FEEDBACK_FREQUENCY_DURATION_MS)
-              lcd_buzz(1000/6,100);
-			   #else
-			     lcd_buzz(LCD_FEEDBACK_FREQUENCY_DURATION_MS,LCD_FEEDBACK_FREQUENCY_HZ);
-			   #endif
-          #endif
-          }
-
         }
-		WRITE(BEEPER, LOW);
+        
 #ifdef SNMM
 		display_loading();
 		do {

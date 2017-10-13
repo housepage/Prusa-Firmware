@@ -3537,7 +3537,7 @@ const char * const MSG_Z_MIN_LANG_TABLE[1] PROGMEM = {
 	MSG_Z_MIN_EN
 };
 
-const char WELCOME_MSG_EN[] PROGMEM = CUSTOM_MENDEL_NAME " ready.";
+const char WELCOME_MSG_EN[] PROGMEM = "Eject the warp core now.";
 const char WELCOME_MSG_CZ[] PROGMEM = CUSTOM_MENDEL_NAME " ok";
 const char WELCOME_MSG_IT[] PROGMEM = CUSTOM_MENDEL_NAME " pronta.";
 const char WELCOME_MSG_ES[] PROGMEM = CUSTOM_MENDEL_NAME " prep.";
